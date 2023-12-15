@@ -9,32 +9,23 @@
 
 static const int MAX_MESSAGE_SIZE = 256;
 
-/**
- * Sends a string message to the server.
- *
- * Parameters:
- *		hostname: 	Remote hostname of the server.
- *		port: 		Remote port of the server.
- * 		message: 	The message to send, as a C-string.
- * Returns:
- *		0 on success, -1 on failure.
- */
+// sends a string message to the server
 int send_message(const char *hostname, int port, const char *message) {
-    // (1) Create a socket
+    // create a socket
 
-    // (2) Create a sockaddr_in to specify remote host and port
+    // create a sockaddr_in to specify remote host and port
 
-    // (3) Connect to remote server
+    // connect to remote server
 
-    // (4) Send message to remote server
+    // send message to remote server
 
-    // (5) Close connection
+    // close connection
 
     return 0;
 }
 
 int main(int argc, const char **argv) {
-    // Parse command line arguments
+    // parse command line arguments
     if (argc != 4) {
         printf("Usage: ./client hostname port_num message\n");
         return 1;

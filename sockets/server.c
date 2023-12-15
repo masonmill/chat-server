@@ -8,55 +8,54 @@
 
 static const size_t MAX_MESSAGE_SIZE = 256;
 
-/**
- * Receives a string message from the client and prints it to stdout.
- *
- * Parameters:
- * 		connectionfd: 	File descriptor for a socket connection
- * 				(e.g. the one returned by accept())
- * Returns:
- *		0 on success, -1 on failure.
- */
+// receives a string message from the client and prints it to stdout
 int handle_connection(int connectionfd) {
-    // (1) Receive message from client.
+    // receive message from client
+    char msg[MAX_MESSAGE_SIZE + 1];
+    memset(msg, 0, sizeof(msg));
 
-    // (2) Print out the message
+    ssize_t recvd = 0;
+    ssize_t rval;
+    do {
+        rval = recv(connectionfd, msg + recvd, MAX_MESSAGE_SIZE - recvd, 0);
+        if (rval == -1) {
+            perror("Error reading stream message");
+            return -1;
+        }
+        recvd += rval;
+    } while (rval > 0);
 
-    // (3) Close connection
+    // print out the message
+    printf("Client %d says '%s'", connectionfd, msg);
+
+    // close connection
+    close(connectionfd);
 
     return 0;
 }
 
-/**
- * Endlessly runs a server that listens for connections and serves
- * them _synchronously_.
- *
- * Parameters:
- *		port: 		The port on which to listen for incoming connections.
- *		queue_size: 	Size of the listen() queue
- * Returns:
- *		-1 on failure, does not return on success.
- */
+// Endlessly runs a server that listens for connections and serves
+// them _synchronously_
 int run_server(int port, int queue_size) {
-    // (1) Create socket
+    // create socket
 
-    // (2) Set the "reuse port" socket option
+    // set the "reuse port" socket option
 
-    // (3a) Create a sockaddr_in struct for the proper port and bind() to it.
+    // create a sockaddr_in struct for the proper port and bind() to it
 
-    // (3b) Bind to the port.
+    // bind to the port
 
-    // (3c) Detect which port was chosen.
+    // detect which port was chosen
 
-    // (4) Begin listening for incoming connections.
+    // begin listening for incoming connections
 
-    // (5) Serve incoming connections one by one forever.
+    // serve incoming connections one by one forever
 
     return 0;
 }
 
 int main(int argc, const char **argv) {
-    // Parse command line arguments
+    // parse command line arguments
     if (argc != 2) {
         printf("Usage: ./server port_num\n");
         return 1;
