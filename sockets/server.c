@@ -35,11 +35,21 @@ int handle_connection(int connectionfd) {
 }
 
 // Endlessly runs a server that listens for connections and serves
-// them _synchronously_
+// them synchronously
 int run_server(int port, int queue_size) {
     // create socket
+    int sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
+    if (sockfd == -1) {
+        perror("Error opening stream socket");
+        return -1;
+    }
 
     // set the "reuse port" socket option
+    int yesval = 1;
+    if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yesval, sizeof(yesval)) == -1) {
+        perror("Error setting socket options");
+        return -1;
+    }
 
     // create a sockaddr_in struct for the proper port and bind() to it
 
