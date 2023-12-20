@@ -52,16 +52,33 @@ int run_server(int port, int queue_size) {
     }
 
     // create a sockaddr_in struct for the proper port and bind() to it
-
-    // bind to the port
+    struct sockaddr_in addr;
+    if (make_server_sockaddr(&addr, port) == -1) {
+        return -1;
+    }
 
     // detect which port was chosen
+    port = get_port_number(sockfd);
+    printf("Server listening on port %d...\n", port);
 
     // begin listening for incoming connections
+    if (listen(sockfd, queue_size) == -1) {
+        perror("Error listening");
+        return -1;
+    }
 
     // serve incoming connections one by one forever
+    while (1) {
+        int connectionfd = accept(sockfd, NULL, NULL);
+        if (connectionfd == -1) {
+            perror("Error accepting connection");
+            return -1;
+        }
 
-    return 0;
+        if (handle_connection(connectionfd) == -1) {
+            return -1;
+        }
+    }
 }
 
 int main(int argc, const char **argv) {
