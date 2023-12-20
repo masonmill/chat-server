@@ -7,7 +7,7 @@
 
 #include "helpers.h"  // make_client_sockaddr()
 
-static const int MAX_MESSAGE_SIZE = 256;
+static const size_t MAX_MESSAGE_SIZE = 256;
 
 // sends a string message to the server
 int send_message(const char *hostname, int port, const char *message) {
@@ -57,7 +57,7 @@ int main(int argc, const char **argv) {
         return 1;
     }
     const char *hostname = argv[1];
-    int port = atoi(argv[2]);
+    const int port = atoi(argv[2]);
     const char *message = argv[3];
 
     printf("Sending message %s to %s:%d\n", message, hostname, port);
