@@ -1,4 +1,6 @@
-## Sockets
+# Sockets
+
+A simple demonstration of socket programming in C
 
 - `server.c`: Runs a server that listens for messages from clients
 - `client.c`: Creates a client that sends a single message to the server
