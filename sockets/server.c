@@ -10,6 +10,8 @@ static const size_t MAX_MESSAGE_SIZE = 256;
 
 // receives a string message from the client and prints it to stdout
 int handle_connection(int connectionfd) {
+    printf("New connection %d\n", connectionfd);
+
     // receive message from client
     char msg[MAX_MESSAGE_SIZE + 1];
     memset(msg, 0, sizeof(msg));
@@ -26,7 +28,7 @@ int handle_connection(int connectionfd) {
     } while (rval > 0);
 
     // print out the message
-    printf("Client %d says '%s'", connectionfd, msg);
+    printf("Client %d says '%s'\n", connectionfd, msg);
 
     // close connection
     close(connectionfd);
@@ -34,8 +36,7 @@ int handle_connection(int connectionfd) {
     return 0;
 }
 
-// Endlessly runs a server that listens for connections and serves
-// them synchronously
+// endlessly runs a server that listens for connections and serves them synchronously
 int run_server(int port, int queue_size) {
     // create socket
     int sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
@@ -54,6 +55,12 @@ int run_server(int port, int queue_size) {
     // create a sockaddr_in struct for the proper port and bind() to it
     struct sockaddr_in addr;
     if (make_server_sockaddr(&addr, port) == -1) {
+        return -1;
+    }
+
+    // bind to the port
+    if (bind(sockfd, (struct sockaddr *)&addr, sizeof(addr)) == -1) {
+        perror("Error binding stream socket");
         return -1;
     }
 
@@ -87,7 +94,7 @@ int main(int argc, const char **argv) {
         printf("Usage: ./server port_num\n");
         return 1;
     }
-    int port = atoi(argv[1]);
+    const int port = atoi(argv[1]);
 
     if (run_server(port, 10) == -1) {
         return 1;
