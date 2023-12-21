@@ -2,5 +2,5 @@
 
 A simple demonstration of multithreading in C++
 
-- `example_thread.cpp`
+- `thread.cpp`
 - `wait.cpp`

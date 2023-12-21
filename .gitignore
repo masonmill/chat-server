@@ -1,3 +1,6 @@
 *.dSYM
 server
 client
+wait
+thread
+shutdown

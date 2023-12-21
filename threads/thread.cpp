@@ -1,5 +1,4 @@
-#include <unistd.h>
-
+#include <chrono>
 #include <iostream>
 #include <thread>
 
@@ -8,7 +7,8 @@ using namespace std;
 void worker() {
     // worker thread
     cout << "worker() starting\n";
-    sleep(5);
+    chrono::seconds timespan(5);
+    this_thread::sleep_for(timespan);
     cout << "worker() shutting down\n";
 }
 
