@@ -64,7 +64,7 @@ In the terminal, run the wait executable
 $ ./thread
 ```
 
-Once again, he main thread will start and spawn the worker thread
+Once again, the main thread will start and spawn the worker thread
 
 ```
 $ ./wait
@@ -84,7 +84,7 @@ working
 working
 ```
 
-Once the main thread sets gobal variable `shutdown` to true, the worker thread exits
+When the main thread "receives" a shutdown signal, it sets gobal variable `shutdown` to true. The updated value is reflected in the worker thread, causing it to exit
 
 ```
 $ ./wait
