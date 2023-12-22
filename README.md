@@ -2,6 +2,8 @@
 
 A multi-threaded chat server that allows clients to connect and message concurrently.
 
+The purpose of this project is to gain a better understanding of multithreading and socket programming in C/C++.
+
 ## Sockets
 
 A subdirectory with code demonstrating simple socket programming in C
