@@ -17,6 +17,8 @@ int main() {
     cout << "main() starting\n";
     thread t(worker);
     cout << "main() can do other work here\n";
+    chrono::seconds timespan(2);
+    this_thread::sleep_for(timespan);
     // ...
     cout << "main() waiting for worker() to exit\n";
     t.join();
