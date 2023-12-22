@@ -1,4 +1,4 @@
-# Chat Server (C/C++)
+# Chat Server (Work in progress)
 
 A multi-threaded chat server that allows clients to connect and message concurrently.
 
