@@ -130,8 +130,8 @@ int main() {
     // main() thread which spawns a second server() thread
     cout << "main() starting\n";
     thread t(server, 8888, 10);
-    this_thread::sleep_for(chrono::seconds(10));  // give up execution to the server thread
-    shutdown_signal = true;                       // tell the server thread to shutdown
-    t.join();                                     // wait for the server thread to shutdown
+    this_thread::sleep_for(chrono::seconds(10));  // give up execution to the server() thread
+    shutdown_signal = true;                       // tell the server() thread to shutdown
+    t.join();                                     // wait for the server() thread to shutdown
     cout << "main() shutting down\n";
 }
