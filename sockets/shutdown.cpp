@@ -1,20 +1,20 @@
-#include <arpa/inet.h>   // htons()
-#include <stdio.h>       // printf(), perror()
-#include <stdlib.h>      // atoi()
-#include <sys/socket.h>  // socket(), bind(), listen(), accept(), send(), recv()
-#include <sys/time.h>    // struct timeval
-#include <unistd.h>      // close()
+#include <arpa/inet.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/socket.h>
+#include <sys/time.h>
+#include <unistd.h>
 
 #include <chrono>
 #include <iostream>
 #include <thread>
 
-#include "helpers.h"  // make_server_sockaddr(), get_port_number()
+#include "helpers.h"
 
 using namespace std;
 
 static const size_t MAX_MESSAGE_SIZE = 256;
-static bool shutdown_signal = false;
+static bool signal = false;
 
 /*
  * runs a server that listens for connections and serves them synchronously
@@ -71,7 +71,7 @@ int server(int port, int queue_size) {
         return -1;
     }
 
-    while (!shutdown_signal) {
+    while (!signal) {
         cout << "waiting...\n";
 
         fd_set rfds;
@@ -131,7 +131,7 @@ int main() {
     cout << "main() starting\n";
     thread t(server, 8888, 10);
     this_thread::sleep_for(chrono::seconds(10));  // give up execution to the server() thread
-    shutdown_signal = true;                       // tell the server() thread to shutdown
+    signal = true;                                // tell the server() thread to shutdown
     t.join();                                     // wait for the server() thread to shutdown
     cout << "main() shutting down\n";
 }
