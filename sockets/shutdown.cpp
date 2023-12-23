@@ -16,34 +16,11 @@ using namespace std;
 static const size_t MAX_MESSAGE_SIZE = 256;
 static bool shutdown_signal = false;
 
-// receives a string message from the client and prints it to stdout
-int handle_connection(int connectionfd) {
-    cout << "Connection from " << connectionfd << "\n";
-
-    // receive message from client
-    char msg[MAX_MESSAGE_SIZE + 1];
-    memset(msg, 0, sizeof(msg));
-
-    ssize_t recvd = 0;
-    ssize_t rval;
-    do {
-        rval = recv(connectionfd, msg + recvd, MAX_MESSAGE_SIZE - recvd, 0);
-        if (rval == -1) {
-            perror("Error reading stream message");
-            return -1;
-        }
-        recvd += rval;
-    } while (rval > 0);
-
-    // print out the message
-    cout << msg << "\n";
-
-    // close connection
-    close(connectionfd);
-
-    return 0;
-}
-
+/*
+ * runs a server that listens for connections and serves them synchronously
+ * if message received, prints it to stdout
+ * exits when a shutdown signal is received
+ */
 int server(int port, int queue_size) {
     // wait on a message from a socket OR a shutdown signal
     cout << "server() starting\n";
