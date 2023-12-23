@@ -1,15 +1,21 @@
-CXX = gcc
-CXXFLAGS = -g -pedantic
+C = gcc
+CFLAGS = -g -pedantic
 
-all: server client
+CXX = g++
+CXXFLAGS = -std=c++17 -pedantic
+
+all: server client shutdown
 
 server: server.c
-	$(CXX) $(CXXFLAGS) server.c -o server
+	$(C) $(CFLAGS) server.c -o server
 
 client: client.c
-	$(CXX) $(CXXFLAGS) client.c -o client
+	$(C) $(CFLAGS) client.c -o client
+
+shutdown: shutdown.cpp
+	$(CXX) $(CXXFLAGS) shutdown.cpp -o shutdown
 
 clean:
-	rm -rf client server *.dSYM
+	rm -rf client server shutdown *.dSYM
 
 .PHONY: clean
