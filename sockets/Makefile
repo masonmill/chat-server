@@ -2,7 +2,7 @@ C = gcc
 CFLAGS = -g -pedantic
 
 CXX = g++
-CXXFLAGS = -std=c++17 -pedantic
+CXXFLAGS = -std=c++20 -pedantic
 
 all: server client shutdown
 
