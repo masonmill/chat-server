@@ -50,3 +50,6 @@ Client 4 says "Hello Server"
 ```
 
 When finished, use `^C` in the terminal to stop the server
+
+TODO:
+add info about shutdown.cpp

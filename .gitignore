@@ -3,4 +3,5 @@ server
 client
 wait
 thread
-shutdown
+server
+user
