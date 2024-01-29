@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wconversion -Wall -Werror -Wextra -pedantic
+CXXFLAGS = -std=c++20 -Wconversion -Wall -Werror -Wextra -pedantic
 
 all: thread wait
 
